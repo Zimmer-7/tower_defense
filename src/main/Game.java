@@ -36,7 +36,7 @@ import entities.Entity;
 import entities.Player;
 import entities.TowerController;
 import grafics.SpriteSheet;
-import grafics.UI;
+import ui.UI;
 import world.World;
 
 public class Game extends Canvas implements Runnable, KeyListener, MouseListener, MouseMotionListener {
@@ -49,6 +49,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public static final int HEIGHT = 208;
 	public static final int SCALE = 3;
 	public static Player player;
+	public static Mouse mouse;
 	public static World world;
 	public static int curLevel = 1;
 	private int maxLevel = 2;
@@ -72,7 +73,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public static Random rand;
 	
 	public UI ui;
-	public TowerController towerController;
+	public static TowerController towerController;
 	
 	public InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("campus.ttf");
 	public static Font newFontBig;
@@ -114,6 +115,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		bullets = new ArrayList<>();
 		player = new Player(0, 0, 16, 16, spriteSheet.getSprite(32, 0, 16, 16));
 		world = new World("/mapa1.png", 1);
+		mouse = new Mouse();
 		entities.add(player);
 		
 		try {
@@ -178,6 +180,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 			}
 			
 			towerController.tick();
+			ui.tick();
 			
 			for(int i = 0; i < bullets.size(); i++) {
 				Entity e = bullets.get(i);
@@ -408,9 +411,16 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		towerController.pressed = true;
-		towerController.mx = e.getX() / 3;
-		towerController.my = e.getY() / 3;
+		if(e.getX() < 744 || e.getY()> 400) {
+			mouse.pressedMap = true;
+			mouse.x = e.getX() / 3;
+			mouse.y = e.getY() / 3;
+		} else {
+			mouse.pressedUI = true;
+			mouse.x = e.getX();
+			mouse.y = e.getY();
+		}
+		
 	}
 
 	@Override

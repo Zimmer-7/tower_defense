@@ -1,0 +1,62 @@
+package ui;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+import main.Game;
+
+public class Button {
+	
+	protected double x;
+	protected double y;
+	protected int width;
+	protected int height;
+	protected int cost;
+	
+	protected boolean dark = false;
+	
+	private BufferedImage sprite;
+	
+	public Button(double x, double y, int width, int height, BufferedImage sprite, int cost) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.cost = cost;
+		
+		this.sprite = sprite;
+	}
+	
+	protected boolean pressed() {
+		return Game.mouse.x >= x && 
+			   Game.mouse.x <= x+width &&
+			   Game.mouse.y >= y && 
+			   Game.mouse.y <= y+height;
+	}
+	
+	public void tick() {
+		
+	}
+	
+	public void render(Graphics g) {
+		if(!dark) {
+			g.setColor(Color.green);
+		} else {
+			g.setColor(Color.blue);
+		}
+		
+		g.fillRect((int)x, (int)y, width, height);
+		if(sprite != null) {
+			g.drawImage(sprite, (int)x, (int)y, width, height, null);
+		}
+		if(cost != 0) {
+			g.setColor(Color.white);
+			g.setFont(new Font("Arial", Font.BOLD, 12));
+			g.drawString("$:"+cost, (int)x+8, (int)(y+width+8));
+		}
+		
+	}
+	
+}
