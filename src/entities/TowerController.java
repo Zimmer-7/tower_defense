@@ -1,13 +1,15 @@
 package entities;
 
-import entities.monkeys.Monkey;
+import entities.monkeys.*;
 import main.Game;
 import world.World;
 
 public class TowerController {
 	
 	public boolean ready = false;
-	private boolean blocked = false;
+	public int towerID;
+	public int towerCost;
+	private Entity tower;
 	
 	public void tick() {
 		if(Game.mouse.pressedMap) {
@@ -25,7 +27,10 @@ public class TowerController {
 			if(World.isFree(xx, yy))
 				return;
 			
-			Monkey tower = new Monkey(xx, yy, 16, 16, Game.spriteSheet.getSprite(32, 16, 16, 16));
+			if(towerID == 1) 
+				tower = new DartMonkey(xx, yy, 16, 16, Game.spriteSheet.getSprite(48, 16, 16, 16));
+			if(towerID == 2)
+				tower = new SuperMonkey(xx, yy, 16, 16, Game.spriteSheet.getSprite(64, 16, 16, 16));
 			
 			for(int i = 0; i < Game.towers.size(); i++) {
 				Entity e = Game.towers.get(i);
@@ -36,7 +41,7 @@ public class TowerController {
 				
 			Game.entities.add(tower);
 			Game.towers.add(tower);
-			Game.player.mana-=20;
+			Game.player.mana-=towerCost;
 			ready = false;
 			
 		}

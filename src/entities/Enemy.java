@@ -134,10 +134,15 @@ public class Enemy extends Entity {
 		for(int i = 0; i < Game.bullets.size(); i++) {
 			Bullet bullet = Game.bullets.get(i);
 			
-			if(Entity.isColliding(this, bullet)) {
+			if(Entity.isColliding(this, bullet) && !bullet.damaged.contains(this)) {
 				damaged = true;
-				life--;
-				Game.bullets.remove(i);
+				life-=bullet.damage;
+				bullet.damaged.add(this);
+				if(bullet.life == 1) {
+					Game.bullets.remove(i);
+				} else {
+					bullet.life--;
+				}
 				return true;
 			}
 		}

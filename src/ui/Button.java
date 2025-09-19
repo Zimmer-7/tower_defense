@@ -14,19 +14,25 @@ public class Button {
 	protected int width;
 	protected int height;
 	protected int cost;
+	protected String nome;
 	
 	protected boolean dark = false;
 	
 	private BufferedImage sprite;
 	
-	public Button(double x, double y, int width, int height, BufferedImage sprite, int cost) {
+	public Button(double x, double y, int width, int height, BufferedImage sprite, int cost, String nome) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
 		this.cost = cost;
+		this.nome = nome;
 		
 		this.sprite = sprite;
+	}
+	
+	public void tick() {
+		
 	}
 	
 	protected boolean pressed() {
@@ -34,10 +40,6 @@ public class Button {
 			   Game.mouse.x <= x+width &&
 			   Game.mouse.y >= y && 
 			   Game.mouse.y <= y+height;
-	}
-	
-	public void tick() {
-		
 	}
 	
 	public void render(Graphics g) {
@@ -51,9 +53,10 @@ public class Button {
 		if(sprite != null) {
 			g.drawImage(sprite, (int)x, (int)y, width, height, null);
 		}
+		g.setColor(Color.white);
+		g.setFont(new Font("Arial", Font.BOLD, 12));
+		g.drawString(nome, (int)x, (int)(y));
 		if(cost != 0) {
-			g.setColor(Color.white);
-			g.setFont(new Font("Arial", Font.BOLD, 12));
 			g.drawString("$:"+cost, (int)x+8, (int)(y+width+8));
 		}
 		

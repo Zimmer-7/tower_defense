@@ -22,6 +22,8 @@ public class Monkey extends Entity {
 	
 	protected double range = 30;
 	protected double fireRate = 1;
+	protected int pierce = 1;
+	protected double damage = 1;
 	
 	private Enemy target = null;
 
@@ -47,7 +49,7 @@ public class Monkey extends Entity {
 				dx = Math.cos(angle);
 				dy = Math.sin(angle);
 						
-				Bullet bullet = new Bullet((double)this.getX()+8, (double)this.getY()+8, 3, 3, null, dx, dy);
+				Bullet bullet = new Bullet((double)this.getX()+8, (double)this.getY()+8, 3, 3, null, dx, dy, pierce, damage);
 				Game.bullets.add(bullet);
 				atacking = false;
 				count = 0;

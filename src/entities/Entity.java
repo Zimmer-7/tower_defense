@@ -42,6 +42,8 @@ public class Entity {
 		this.masky = 0;
 		this.maskw = width;
 		this.maskh = height;
+		
+		this.depth = 0;
 	}
 	
 	public void setMask(int maskx, int masky, int maskw, int maskh) {

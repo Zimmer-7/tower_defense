@@ -17,7 +17,7 @@ public class Player extends Entity {
 	public int life = maxLife;
 	
 	public double maxMana = 100;
-	public double mana = maxMana;
+	public double mana = maxMana/2;
 	
 	private int timer = 0;
 	private int damageFrames = 0;
@@ -31,7 +31,7 @@ public class Player extends Entity {
 	public Player(double x, double y, int width, int height, BufferedImage sprite) {
 		super(x, y, width, height, sprite);
 		
-		playerStop = Game.spriteSheet.getSprite(64, 0, 16, 16);
+		playerStop = Game.spriteSheet.getSprite(112, 0, 16, 16);
 		
 		depth = 1;
 	}

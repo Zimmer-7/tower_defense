@@ -143,11 +143,11 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 			e.printStackTrace();
 		}
 		
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
-		Image cursor = toolkit.getImage(getClass().getResource("/cursor.png"));
-		Cursor c = toolkit.createCustomCursor(cursor, new Point(0, 0), "img");
+		//Toolkit toolkit = Toolkit.getDefaultToolkit();
+		//Image cursor = toolkit.getImage(getClass().getResource("/cursor.png"));
+		//Cursor c = toolkit.createCustomCursor(cursor, new Point(0, 0), "img");
 		
-		frame.setCursor(c);
+		//frame.setCursor(c);
 		frame.setIconImage(icone);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
