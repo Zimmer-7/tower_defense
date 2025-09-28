@@ -20,8 +20,8 @@ public class UI {
 	public UI() {
 		BigButtons = new ArrayList<>();
 		subButtons = new ArrayList<>();
-		BigButtons.add(new MonkeyMenuButton(754, 8, 40, 40, Game.spriteSheet.getSprite(32, 16, 16, 16), 0, "macacos"));
-		BigButtons.add(new GemMenuButton(814, 8, 40, 40, null, 0, "gemas"));
+		BigButtons.add(new MonkeyMenuButton(754, 8, 40, 40, Game.spriteSheet.getSprite(32, 16, 16, 16), "macacos"));
+		BigButtons.add(new GemMenuButton(814, 8, 40, 40, null, "gemas"));
 	}
 	
 	public void tick() {

@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
+import entities.gems.Sparkle;
 import main.AdvancedSound;
 import main.Game;
 import main.Sound;
@@ -20,8 +21,11 @@ public class Enemy extends Entity {
 	private boolean right = false;
 	private boolean left = false;
 	private double maxLife = 5;
-	private double life = maxLife;
+	public double life = maxLife;
 	private boolean damaged = false;
+	public int poisonTime = 0;
+	public int poisonDamage = 0;
+	private int time = 0;
 	
 	private int frames = 0;
 	private int damageFrames = 0;
@@ -136,15 +140,19 @@ public class Enemy extends Entity {
 			
 			if(Entity.isColliding(this, bullet) && !bullet.damaged.contains(this)) {
 				damaged = true;
-				life-=bullet.damage;
-				bullet.damaged.add(this);
-				if(bullet.life == 1) {
-					Game.bullets.remove(i);
-				} else {
-					bullet.life--;
-				}
+				bullet.hit(this);
+			
 				return true;
 			}
+		}
+		if(poisonTime > 0) {
+			time++;
+			if(time >= 60) {
+				time = 0;
+				poisonTime--;
+				life-=poisonDamage;
+			}
+			
 		}
 		
 		return false;

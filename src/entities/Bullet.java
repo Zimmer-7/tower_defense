@@ -12,19 +12,19 @@ public class Bullet extends Entity {
 	
 	private double dx;
 	private double dy;
-	private double speed = 5;
-	private int time = 75;
-	public int life;
+	private double speed = 4;
+	private int time;
+	public int life = 1;
 	public double damage;
 	public List<Enemy> damaged;
 
-	public Bullet(double x, double y, int width, int height, BufferedImage sprite, double dx, double dy, int life, double damage) {
+	public Bullet(double x, double y, int width, int height, BufferedImage sprite, double dx, double dy, double damage, int time) {
 		super(x, y, width, height, sprite);
 		this.dx = dx;
 		this.dy = dy;
-		this.life = life;
 		this.damage = damage;
 		damaged = new ArrayList<>();
+		this.time = time;
 	}
 	
 	@Override
@@ -33,9 +33,23 @@ public class Bullet extends Entity {
 		y += dy*speed;
 		time --;
 		
-		if(time == 0) 
+		if(time == 0) {
 			Game.bullets.remove(this);
+			damaged.clear();
+		}
 		
+	}
+	
+	public void hit(Enemy e) {
+		e.life-=damage;
+		damaged.add(e);
+		
+		if(life == 1) {
+			Game.bullets.remove(this);
+			damaged.clear();
+		} else {
+			life--;
+		}
 	}
 	
 	@Override
