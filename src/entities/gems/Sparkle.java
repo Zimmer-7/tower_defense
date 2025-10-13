@@ -7,6 +7,7 @@ import java.util.List;
 
 import entities.Bullet;
 import entities.Enemy;
+import entities.Entity;
 import main.Game;
 
 public class Sparkle extends Bullet {
@@ -32,12 +33,30 @@ public class Sparkle extends Bullet {
 		
 	}
 	
-	public void hit(Enemy e) {
-		super.hit(e);
+	@Override
+	public void checkDamage() {
+		for(int i = 0; i < Game.enemies.size(); i++) {
+			Enemy en = Game.enemies.get(i);
+			
+			if(Entity.isColliding(this, en) && !damaged.contains(en)) {
+				
+				damaged.add(en);
+				en.hurt(damage);
+				en.poisonDamage = poison;
+				en.poisonTime = 3;
+				Game.player.mana += manaGain;
+				
+				if(life == 1) {
+					dead = true;
+					damaged.clear();
+					return;
+				} else {
+					life--;
+				}
+			
+			}
+		}
 		
-		Game.player.mana += manaGain;
-		e.poisonTime = 3;
-		e.poisonDamage = poison;
 	}
 	
 	

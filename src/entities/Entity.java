@@ -27,7 +27,7 @@ public class Entity {
 	
 	public int depth;
 	
-	private BufferedImage sprite;
+	protected BufferedImage sprite;
 	
 	protected List<Node> path;
 	

@@ -88,7 +88,15 @@ public class Enemy extends Entity {
 					
 			}
 			
-			checkDamage();
+			if(poisonTime > 0) {
+				time++;
+				if(time >= 60) {
+					time = 0;
+					poisonTime--;
+					life-=poisonDamage;
+				}
+				
+			}
 			
 			if(life <= 0) {
 				Game.entities.remove(this);
@@ -134,28 +142,10 @@ public class Enemy extends Entity {
 		return false;
 	}
 	
-	public boolean checkDamage() {
-		for(int i = 0; i < Game.bullets.size(); i++) {
-			Bullet bullet = Game.bullets.get(i);
-			
-			if(Entity.isColliding(this, bullet) && !bullet.damaged.contains(this)) {
-				damaged = true;
-				bullet.hit(this);
-			
-				return true;
-			}
-		}
-		if(poisonTime > 0) {
-			time++;
-			if(time >= 60) {
-				time = 0;
-				poisonTime--;
-				life-=poisonDamage;
-			}
-			
-		}
+	public void hurt(double damage) {
+		life-=damage;
+		damaged = true;
 		
-		return false;
 	}
 	
 	public void followPath(List<Node> path, double speed) {

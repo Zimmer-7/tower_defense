@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import main.Game;
 
 public class Particle extends Entity {
-	private int lifeTime = 8;
+	private int lifeTime = 6;
 	private int curTime = 0;
 	
 	private int speed = 3;

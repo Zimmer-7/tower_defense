@@ -19,18 +19,10 @@ public class MonkeyMenuButton extends Button {
 				UI.subButtons.clear();
 				UI.subButtons.add(new TowerButton(754, 68, 40, 40, Game.spriteSheet.getSprite(48, 16, 16, 16), 20, "dardo", 1));
 				UI.subButtons.add(new TowerButton(814, 68, 40, 40, Game.spriteSheet.getSprite(64, 16, 16, 16), 90, "Super", 2));
+				UI.subButtons.add(new TowerButton(754, 128, 40, 40, Game.spriteSheet.getSprite(80, 16, 16, 16), 45, "Bomba", 3));
 			}
 			
-			if(UI.subButtons.size() == 2) {
-				if(UI.subButtons.get(0).pressed()) {
-					UI.subButtons.get(0).dark = true;
-					UI.subButtons.get(1).dark = false;
-				}
-				if(UI.subButtons.get(1).pressed()) {
-					UI.subButtons.get(1).dark = true;
-					UI.subButtons.get(0).dark = false;
-				}
-			}
+			
 		}
 	}
 	

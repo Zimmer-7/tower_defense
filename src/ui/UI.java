@@ -21,7 +21,7 @@ public class UI {
 		BigButtons = new ArrayList<>();
 		subButtons = new ArrayList<>();
 		BigButtons.add(new MonkeyMenuButton(754, 8, 40, 40, Game.spriteSheet.getSprite(32, 16, 16, 16), "macacos"));
-		BigButtons.add(new GemMenuButton(814, 8, 40, 40, null, "gemas"));
+		BigButtons.add(new GemMenuButton(814, 8, 40, 40, Game.spriteSheet.getSprite(32, 0, 16, 16), "gemas"));
 	}
 	
 	public void tick() {
@@ -37,7 +37,6 @@ public class UI {
 			}
 		}
 		
-		Game.mouse.pressedUI = false;
 	}
 
 	public void render(Graphics g) {

@@ -43,7 +43,7 @@ public class Tower extends Entity {
 		if(atacking) {
 			count ++;
 		
-			if(count >= 60/fireRate) {
+			if(count >= 60.0/fireRate) {
 				attack();
 				
 				atacking = false;

@@ -21,23 +21,8 @@ public class GemMenuButton extends Button {
 				UI.subButtons.add(new TowerButton(754, 128, 40, 40, Game.spriteSheet.getSprite(64, 0, 16, 16), 20, "mana-gen", 6));
 			}
 			
-			if(UI.subButtons.size() == 3) {
-				if(UI.subButtons.get(0).pressed()) {
-					UI.subButtons.get(0).dark = true;
-					UI.subButtons.get(1).dark = false;
-					UI.subButtons.get(2).dark = false;
-				}
-				if(UI.subButtons.get(1).pressed()) {
-					UI.subButtons.get(1).dark = true;
-					UI.subButtons.get(0).dark = false;
-					UI.subButtons.get(2).dark = false;
-				}
-				if(UI.subButtons.get(2).pressed()) {
-					UI.subButtons.get(2).dark = true;
-					UI.subButtons.get(1).dark = false;
-					UI.subButtons.get(0).dark = false;
-				}
-			}
+			
+			
 		}
 	}
 	

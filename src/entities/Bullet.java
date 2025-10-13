@@ -17,6 +17,8 @@ public class Bullet extends Entity {
 	public int life = 1;
 	public double damage;
 	public List<Enemy> damaged;
+	
+	public boolean dead = false;
 
 	public Bullet(double x, double y, int width, int height, BufferedImage sprite, double dx, double dy, double damage, int time) {
 		super(x, y, width, height, sprite);
@@ -38,18 +40,29 @@ public class Bullet extends Entity {
 			damaged.clear();
 		}
 		
+		checkDamage();
+		
 	}
 	
-	public void hit(Enemy e) {
-		e.life-=damage;
-		damaged.add(e);
-		
-		if(life == 1) {
-			Game.bullets.remove(this);
-			damaged.clear();
-		} else {
-			life--;
+	public void checkDamage() {
+		for(int i = 0; i < Game.enemies.size(); i++) {
+			Enemy en = Game.enemies.get(i);
+			
+			if(Entity.isColliding(this, en) && !damaged.contains(en)) {
+				
+				damaged.add(en);
+				en.hurt(damage);
+				if(life == 1) {
+					dead = true;
+					damaged.clear();
+					return;
+				} else {
+					life--;
+				}
+			
+			}
 		}
+		
 	}
 	
 	@Override

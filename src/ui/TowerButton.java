@@ -20,15 +20,29 @@ public class TowerButton extends Button {
 	
 	@Override
 	public void tick() {
-		if(!Game.towerController.ready)
+		if(!Game.towerController.ready && !Game.gemController.ready)
 			dark = false;
 		
 		if(Game.mouse.pressedUI) {
 			
 			if(pressed()) {
-				Game.towerController.ready = true;
-				Game.towerController.towerID = id;
-				Game.towerController.towerCost = cost;
+				for(int i = 0; i < UI.subButtons.size(); i++) {
+					UI.subButtons.get(i).dark = false;
+				}
+				
+				dark = true;
+				
+				if(id < 5) {
+					Game.towerController.ready = true;
+					Game.gemController.ready = false;
+					Game.towerController.towerID = id;
+					Game.towerController.towerCost = cost;
+				} else {
+					Game.gemController.ready = true;
+					Game.towerController.ready = false;
+					Game.gemController.gemID = id;
+					Game.gemController.gemCost = cost;
+				}
 			}
 			
 		}

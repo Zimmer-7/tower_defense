@@ -33,8 +33,10 @@ import javax.swing.WindowConstants;
 import entities.Bullet;
 import entities.Enemy;
 import entities.Entity;
+import entities.GemController;
 import entities.Player;
 import entities.TowerController;
+import entities.gems.EmptyTower;
 import grafics.SpriteSheet;
 import ui.UI;
 import world.World;
@@ -66,6 +68,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public static List<Entity> entities;
 	public static List<Enemy> enemies;
 	public static List<Entity> towers;
+	public static List<EmptyTower> emptyTowers;
 	public static List<Bullet> bullets;
 	public static List<Entity> items;
 	public static SpriteSheet spriteSheet;
@@ -74,6 +77,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	
 	public UI ui;
 	public static TowerController towerController;
+	public static GemController gemController;
 	
 	public InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("campus.ttf");
 	public static Font newFontBig;
@@ -104,6 +108,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		spriteSheet = new SpriteSheet("/recursos.png");	
 		ui = new UI();
 		towerController = new TowerController();
+		gemController = new GemController();
 		
 		pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
 		//light = new Light();
@@ -111,6 +116,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		entities = new ArrayList<>();
 		enemies = new ArrayList<>();
 		towers = new ArrayList<>();
+		emptyTowers = new ArrayList<>();
 		items = new ArrayList<>();
 		bullets = new ArrayList<>();
 		player = new Player(0, 0, 16, 16, spriteSheet.getSprite(32, 0, 16, 16));
@@ -180,12 +186,15 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 			}
 			
 			towerController.tick();
+			gemController.tick();
 			ui.tick();
 			
 			for(int i = 0; i < bullets.size(); i++) {
-				Entity e = bullets.get(i);
-				e.tick();
+				Bullet b = bullets.get(i);
+				b.tick();
 			}
+			
+			bullets.removeIf(b -> b.dead);
 			
 		}
 		if(gameState.equals("Prep")) {
@@ -413,10 +422,12 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public void mousePressed(MouseEvent e) {
 		if(e.getX() < 744 || e.getY()> 400) {
 			mouse.pressedMap = true;
+			mouse.pressedUI = false;
 			mouse.x = e.getX() / 3;
 			mouse.y = e.getY() / 3;
 		} else {
 			mouse.pressedUI = true;
+			mouse.pressedMap = false;
 			mouse.x = e.getX();
 			mouse.y = e.getY();
 		}
