@@ -20,7 +20,7 @@ public class Enemy extends Entity {
 	public double speed = 0.5;
 	private boolean right = false;
 	private boolean left = false;
-	private double maxLife = 5;
+	protected double maxLife = 5;
 	public double life = maxLife;
 	private boolean damaged = false;
 	public int poisonTime = 0;
@@ -31,25 +31,15 @@ public class Enemy extends Entity {
 	private int damageFrames = 0;
 	private int maxFrames = 6;
 	private int index = 0;
-	private int maxIndex = 1;
+	protected int maxIndex = 1;
 	
-	private BufferedImage[] enemyRight;
-	private BufferedImage[] enemyLeft;
-	private BufferedImage enemyDamageLeft;
-	private BufferedImage enemyDamageRight;
+	protected BufferedImage[] enemyRight;
+	protected BufferedImage[] enemyLeft;
+	protected BufferedImage enemyDamageLeft;
+	protected BufferedImage enemyDamageRight;
 
 	public Enemy(double x, double y, int width, int height, BufferedImage sprite) {
 		super(x, y, width, height, null);
-		
-		enemyRight = new BufferedImage[2];
-		enemyLeft = new BufferedImage[2];
-		
-		enemyLeft[0] = Game.spriteSheet.getSprite(32, 48, 16, 16);
-		enemyLeft[1] = Game.spriteSheet.getSprite(32, 64, 16, 16);
-		enemyRight[0] = Game.spriteSheet.getSprite(48, 48, 16, 16);
-		enemyRight[1] = Game.spriteSheet.getSprite(48, 64, 16, 16);
-		enemyDamageLeft = Game.spriteSheet.getSprite(32, 80, 16, 16);
-		enemyDamageRight = Game.spriteSheet.getSprite(48, 80, 16, 16);
 		
 		depth = 0;
 		
@@ -116,7 +106,6 @@ public class Enemy extends Entity {
 		} 
 		
 	}
-		
 	
 	public boolean touching() {
 		Rectangle current = new Rectangle(this.getX() + maskx, this.getY() + masky, maskw, maskh);

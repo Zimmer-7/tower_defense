@@ -38,7 +38,7 @@ public class Tower extends Entity {
 			atacking = true;
 			xTarget = target.getX()+8;
 			yTarget = target.getY()+8;
-		} 
+		}
 		
 		if(atacking) {
 			count ++;
@@ -49,6 +49,8 @@ public class Tower extends Entity {
 				atacking = false;
 				count = 0;
 			}
+		}else {
+			count = 60;
 		}
 		
 	}

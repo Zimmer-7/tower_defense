@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import entities.Entity;
 import main.Game;
 
 public class UI {
@@ -16,12 +15,15 @@ public class UI {
 	
 	public List<Button> BigButtons;
 	public static List<Button> subButtons;
+	public WaveButton wave;
 	
 	public UI() {
 		BigButtons = new ArrayList<>();
 		subButtons = new ArrayList<>();
 		BigButtons.add(new MonkeyMenuButton(754, 8, 40, 40, Game.spriteSheet.getSprite(32, 16, 16, 16), "macacos"));
 		BigButtons.add(new GemMenuButton(814, 8, 40, 40, Game.spriteSheet.getSprite(32, 0, 16, 16), "gemas"));
+		
+		wave = new WaveButton(Game.spawner.getX()+6, Game.spawner.getY()+96, 48, 48, Game.spriteSheet.getSprite(32, 96, 16, 16), "onda1");
 	}
 	
 	public void tick() {
@@ -36,6 +38,8 @@ public class UI {
 				b.tick();
 			}
 		}
+		
+		wave.tick();
 		
 	}
 
@@ -64,6 +68,8 @@ public class UI {
 				b.render(g);
 			}
 		}
+		
+		wave.render(g);
 	}
 	
 }

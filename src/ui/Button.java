@@ -17,7 +17,7 @@ public class Button {
 	
 	protected boolean dark = false;
 	
-	private BufferedImage sprite;
+	protected BufferedImage sprite;
 	
 	public Button(double x, double y, int width, int height, BufferedImage sprite, String nome) {
 		this.x = x;
@@ -38,6 +38,13 @@ public class Button {
 			   Game.mouse.x <= x+width &&
 			   Game.mouse.y >= y && 
 			   Game.mouse.y <= y+height;
+	}
+	
+	protected boolean pressedMap() {
+		return Game.mouse.x*3 >= x && 
+			   Game.mouse.x*3 <= x+width &&
+			   Game.mouse.y*3 >= y && 
+			   Game.mouse.y*3 <= y+height;
 	}
 	
 	public void render(Graphics g) {

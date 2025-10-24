@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 import entities.Bullet;
+import entities.Cockroach;
 import entities.Enemy;
 import entities.Entity;
 import main.Game;
@@ -42,8 +43,10 @@ public class Sparkle extends Bullet {
 				
 				damaged.add(en);
 				en.hurt(damage);
-				en.poisonDamage = poison;
-				en.poisonTime = 3;
+				if(en instanceof Cockroach) {
+					en.poisonDamage = poison;
+					en.poisonTime = 3;
+				}
 				Game.player.mana += manaGain;
 				
 				if(life == 1) {

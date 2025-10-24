@@ -5,11 +5,18 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import main.Game;
+import ui.WaveButton;
 
 public class Spawner extends Entity {
 	
 	private int timer = 0;
 	private int spawnTime = 60;
+	private int enemyQttd = 5;
+	private int enemyCount = enemyQttd;
+	private Enemy enemy;
+	public boolean ready = false;
+	public boolean bloons = false;
+	public boolean cockroachs = false;
 
 	public Spawner(double x, double y, int width, int height, BufferedImage sprite) {
 		super(x, y, width, height, sprite);
@@ -17,12 +24,36 @@ public class Spawner extends Entity {
 	
 	@Override
 	public void tick() {
-		timer ++;
-		if(timer == spawnTime) {
-			Enemy enemy = new Enemy(x, y, 16, 16, null);
-			Game.entities.add(enemy);
-			Game.enemies.add(enemy);
-			timer = 0;
+		if(ready) {
+			timer ++;
+			if(timer == spawnTime && enemyCount > 0) {
+				if(cockroachs)
+					enemy = new Cockroach(x, y, 16, 16, null);
+				
+				if(bloons)
+					enemy = new Bloon(x, y, 16, 16, null);
+				
+				Game.entities.add(enemy);
+				Game.enemies.add(enemy);
+				timer = 0;
+				enemyCount--;
+			}
+		}
+		
+		if(enemyCount == 0) {
+			ready = false;
+			if(bloons) {
+				WaveButton.cockroachSpawn = true;
+				enemyCount = enemyQttd;
+			}
+			
+			if(cockroachs) {
+				WaveButton.bloonSpawn = true;
+				enemyCount = enemyQttd*2;
+			}
+			
+			enemyQttd++;
+			spawnTime--;
 		}
 	}
 

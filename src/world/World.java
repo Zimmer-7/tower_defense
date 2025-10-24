@@ -39,8 +39,8 @@ public class World {
 					if(pixels[pos] == 0xFFFF0000) {
 						//spawn
 						tiles[pos] = new Floor(xx*16, yy*16, Tile.TILE_WALL_DARK);
-						Spawner spawner = new Spawner(xx*16.0, yy*16.0, 16, 16, null);
-						Game.entities.add(spawner);
+						Game.spawner.setX(xx*16.0);
+						Game.spawner.setY(yy*16.0);
 					}
 					if(pixels[pos] == 0xFF0000FF) {
 						//base

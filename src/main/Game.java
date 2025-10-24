@@ -35,6 +35,7 @@ import entities.Enemy;
 import entities.Entity;
 import entities.GemController;
 import entities.Player;
+import entities.Spawner;
 import entities.TowerController;
 import entities.gems.EmptyTower;
 import grafics.SpriteSheet;
@@ -51,6 +52,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public static final int HEIGHT = 208;
 	public static final int SCALE = 3;
 	public static Player player;
+	public static Spawner spawner;
 	public static Mouse mouse;
 	public static World world;
 	public static int curLevel = 1;
@@ -106,7 +108,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		
 		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		spriteSheet = new SpriteSheet("/recursos.png");	
-		ui = new UI();
+
 		towerController = new TowerController();
 		gemController = new GemController();
 		
@@ -120,9 +122,13 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		items = new ArrayList<>();
 		bullets = new ArrayList<>();
 		player = new Player(0, 0, 16, 16, spriteSheet.getSprite(32, 0, 16, 16));
+		spawner = new Spawner(0, 0, 16, 16, null);
 		world = new World("/mapa1.png", 1);
 		mouse = new Mouse();
 		entities.add(player);
+		entities.add(spawner);
+		
+		ui = new UI();
 		
 		try {
 			newFontBig = Font.createFont(Font.TRUETYPE_FONT, stream).deriveFont(80f);
@@ -420,7 +426,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if(e.getX() < 744 || e.getY()> 400) {
+		if(e.getX() < 744 || e.getY() > 400) {
 			mouse.pressedMap = true;
 			mouse.pressedUI = false;
 			mouse.x = e.getX() / 3;
