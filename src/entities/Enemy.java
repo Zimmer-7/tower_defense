@@ -17,6 +17,8 @@ import world.World;
 
 public class Enemy extends Entity {
 	
+	private boolean justSpawned = true;
+	
 	public double speed = 0.5;
 	private boolean right = false;
 	private boolean left = false;
@@ -59,6 +61,11 @@ public class Enemy extends Entity {
 			
 			followPath(path, speed);
 			
+			if(justSpawned) {
+				justSpawned = false;
+				return;
+			}
+			
 			if(touching() && frames == 0) {
 				AdvancedSound.hurt.play();
 				Game.player.life --;
@@ -89,9 +96,7 @@ public class Enemy extends Entity {
 			}
 			
 			if(life <= 0) {
-				Game.entities.remove(this);
-				Game.enemies.remove(this);
-				Game.player.mana += maxLife;
+				die();
 				return;
 			}
 			
@@ -112,6 +117,12 @@ public class Enemy extends Entity {
 		Rectangle player = new Rectangle(Game.player.getX(), Game.player.getY(), 16, 16);
 		
 		return current.intersects(player);
+	}
+	
+	protected void die() {
+		Game.entities.remove(this);
+		Game.enemies.remove(this);
+		Game.player.mana += maxLife;
 	}
 	
 	public boolean isCollidingEn(int xnext, int ynext) {

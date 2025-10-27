@@ -32,8 +32,11 @@ public class WaveButton extends Button {
 			}
 		}
 		
-		if(cooldown == 0 || pressedMap()) {
+		if(cooldown == 0 || pressedMap() && (cockroachSpawn || bloonSpawn)) {
+			Game.mouse.x = 0;
+			Game.mouse.y = 0;
 			Game.player.mana += cooldown;
+			
 			if(cockroachSpawn) {
 				Game.spawner.ready = true;
 				Game.spawner.cockroachs = true;
@@ -50,11 +53,14 @@ public class WaveButton extends Button {
 			cooldown = 5;
 			cockroachSpawn = false;
 			bloonSpawn = false;
+			
+			
 		}
 	}
 	
 	@Override
 	public void render(Graphics g) {
+		this.nome = "onda " + Game.spawner.level;
 		super.render(g);
 		
 		int cooldownBar = height-cooldown*time;

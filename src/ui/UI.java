@@ -23,7 +23,7 @@ public class UI {
 		BigButtons.add(new MonkeyMenuButton(754, 8, 40, 40, Game.spriteSheet.getSprite(32, 16, 16, 16), "macacos"));
 		BigButtons.add(new GemMenuButton(814, 8, 40, 40, Game.spriteSheet.getSprite(32, 0, 16, 16), "gemas"));
 		
-		wave = new WaveButton(Game.spawner.getX()+6, Game.spawner.getY()+96, 48, 48, Game.spriteSheet.getSprite(32, 96, 16, 16), "onda1");
+		wave = new WaveButton(Game.spawner.getX()+6, Game.spawner.getY()+96, 48, 48, Game.spriteSheet.getSprite(32, 96, 16, 16), "onda 1");
 	}
 	
 	public void tick() {

@@ -17,6 +17,7 @@ public class Spawner extends Entity {
 	public boolean ready = false;
 	public boolean bloons = false;
 	public boolean cockroachs = false;
+	public int level = 1;
 
 	public Spawner(double x, double y, int width, int height, BufferedImage sprite) {
 		super(x, y, width, height, sprite);
@@ -28,10 +29,10 @@ public class Spawner extends Entity {
 			timer ++;
 			if(timer == spawnTime && enemyCount > 0) {
 				if(cockroachs)
-					enemy = new Cockroach(x, y, 16, 16, null);
+					enemy = new Cockroach(x, y, 16, 16, null, level);
 				
 				if(bloons)
-					enemy = new Bloon(x, y, 16, 16, null);
+					enemy = new Bloon(x, y, 16, 16, null, level, 0);
 				
 				Game.entities.add(enemy);
 				Game.enemies.add(enemy);
@@ -42,6 +43,7 @@ public class Spawner extends Entity {
 		
 		if(enemyCount == 0) {
 			ready = false;
+			level ++;
 			if(bloons) {
 				WaveButton.cockroachSpawn = true;
 				enemyCount = enemyQttd;

@@ -6,7 +6,7 @@ import main.Game;
 
 public class Cockroach extends Enemy {
 
-	public Cockroach(double x, double y, int width, int height, BufferedImage sprite) {
+	public Cockroach(double x, double y, int width, int height, BufferedImage sprite, int level) {
 		super(x, y, width, height, sprite);
 		
 		this.maxIndex = 1;
@@ -20,6 +20,11 @@ public class Cockroach extends Enemy {
 		enemyRight[1] = Game.spriteSheet.getSprite(48, 64, 16, 16);
 		enemyDamageLeft = Game.spriteSheet.getSprite(32, 80, 16, 16);
 		enemyDamageRight = Game.spriteSheet.getSprite(48, 80, 16, 16);
+		
+		this.maxLife *= (level+4)/5.0;
+		System.out.println(this.maxLife);
+		this.life = this.maxLife;
+		this.speed *= (level+11)/12.0;
 		
 	}
 
