@@ -28,6 +28,14 @@ public class Spawner extends Entity {
 		if(ready) {
 			timer ++;
 			if(timer == spawnTime && enemyCount > 0) {
+				if(level%10 == 0) {
+					enemy = new Boss(x, y, 16, 16, null);
+					Game.entities.add(enemy);
+					Game.enemies.add(enemy);
+					timer = 0;
+					enemyCount = 0;
+					return;
+				}
 				if(cockroachs)
 					enemy = new Cockroach(x, y, 16, 16, null, level);
 				

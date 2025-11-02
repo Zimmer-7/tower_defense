@@ -22,7 +22,6 @@ public class Cockroach extends Enemy {
 		enemyDamageRight = Game.spriteSheet.getSprite(48, 80, 16, 16);
 		
 		this.maxLife *= (level+4)/5.0;
-		System.out.println(this.maxLife);
 		this.life = this.maxLife;
 		this.speed *= (level+11)/12.0;
 		

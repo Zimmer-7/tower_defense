@@ -16,6 +16,8 @@ public class MonkeyMenuButton extends Button {
 		if(Game.mouse.pressedUI) {
 			
 			if(pressed()) {
+				dark = true;
+				UI.BigButtons.get(1).dark = false;
 				UI.subButtons.clear();
 				UI.subButtons.add(new TowerButton(754, 68, 40, 40, Game.spriteSheet.getSprite(48, 16, 16, 16), 20, "dardo", 1));
 				UI.subButtons.add(new TowerButton(814, 68, 40, 40, Game.spriteSheet.getSprite(64, 16, 16, 16), 90, "Super", 2));

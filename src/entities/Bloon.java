@@ -18,13 +18,13 @@ public class Bloon extends Enemy {
 		enemyLeft = new BufferedImage[1];
 		
 		if(grade == 0) {
-			if(level > 2)
+			if(level >= 2)
 				this.grade++;
-			if(level > 4)
+			if(level >= 4)
 				this.grade++;
-			if(level > 6)
+			if(level >= 6)
 				this.grade++;
-			if(level > 8)
+			if(level >= 8)
 				this.grade++;
 		}else {
 			this.grade = grade;
@@ -69,8 +69,6 @@ public class Bloon extends Enemy {
 	            },
 	            50
 	        );
-		
-		
 		
 	}
 

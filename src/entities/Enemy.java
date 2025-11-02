@@ -20,8 +20,9 @@ public class Enemy extends Entity {
 	private boolean justSpawned = true;
 	
 	public double speed = 0.5;
-	private boolean right = false;
-	private boolean left = false;
+	protected boolean right = false;
+	protected boolean left = false;
+	protected boolean down = false;
 	protected double maxLife = 5;
 	public double life = maxLife;
 	private boolean damaged = false;
@@ -68,7 +69,12 @@ public class Enemy extends Entity {
 			
 			if(touching() && frames == 0) {
 				AdvancedSound.hurt.play();
-				Game.player.life --;
+				if(this instanceof Boss) {
+					Game.player.life = 0;
+				} else {
+					Game.player.life --;
+				}
+				
 				Game.player.mana -= life;
 				Game.player.damaged = true;
 				Game.entities.remove(this);
@@ -91,6 +97,8 @@ public class Enemy extends Entity {
 					time = 0;
 					poisonTime--;
 					life-=poisonDamage;
+					if(poisonTime%3 == 0 && poisonDamage > 0)
+						poisonDamage--;
 				}
 				
 			}
@@ -166,13 +174,17 @@ public class Enemy extends Entity {
 	            	x += (dx / distance) * speed;
 	                right = true;
 	                left = false;
+	                down = false;
 	            } else if (dx < 0 && World.isFree((int)(x - speed), (int)y)) {
 	            	x += (dx / distance) * speed;
 	                right = false;
 	                left = true;
+	                down = false;
 	            } 
 	            if((dy > 0 && World.isFree((int)x, (int)(y + speed))) || (dy < 0 && World.isFree((int)x, (int)(y - speed)))) {
 	            	 y += (dy / distance) * speed;
+	            	 down = true;
+	            	
 	            }
 	        } else {
 	            x = targetX;

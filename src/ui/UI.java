@@ -13,7 +13,7 @@ public class UI {
 	
 	public static BufferedImage FULL_HEART = Game.spriteSheet.getSprite(128, 0, 8, 8);
 	
-	public List<Button> BigButtons;
+	public static List<Button> BigButtons;
 	public static List<Button> subButtons;
 	public WaveButton wave;
 	

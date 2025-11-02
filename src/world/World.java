@@ -73,16 +73,19 @@ public class World {
 		Game.entities.clear();
 		Game.enemies.clear();
 		Game.towers.clear();
-		Game.items.clear();
+		Game.emptyTowers.clear();
 		Game.bullets.clear();
 		Game.entities = new ArrayList<>();
 		Game.enemies = new ArrayList<>();
 		Game.towers = new ArrayList<>();
+		Game.emptyTowers = new ArrayList<>();
 		Game.bullets = new ArrayList<>();
 		Game.spriteSheet = new SpriteSheet("/recursos.png");	
 		Game.player = new Player(0, 0, 16, 16, Game.spriteSheet.getSprite(32, 0, 16, 16));
+		Game.spawner = new Spawner(0, 0, 16, 16, null);
 		Game.world = new World("/mapa"+level+".png", level);
 		Game.entities.add(Game.player);
+		Game.entities.add(Game.spawner);
 		Game.gameState = "Normal";
 	}
 	

@@ -72,7 +72,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public static List<Entity> towers;
 	public static List<EmptyTower> emptyTowers;
 	public static List<Bullet> bullets;
-	public static List<Entity> items;
 	public static SpriteSheet spriteSheet;
 	
 	public static Random rand;
@@ -119,7 +118,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		enemies = new ArrayList<>();
 		towers = new ArrayList<>();
 		emptyTowers = new ArrayList<>();
-		items = new ArrayList<>();
 		bullets = new ArrayList<>();
 		player = new Player(0, 0, 16, 16, spriteSheet.getSprite(32, 0, 16, 16));
 		spawner = new Spawner(0, 0, 16, 16, null);
